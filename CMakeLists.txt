@@ -15,12 +15,12 @@ set(ALL_SOURCES ${SRC_FILES} ${VID_FILES} ${UTI_FILES} )
 add_executable(main ${ALL_SOURCES})
 
 target_include_directories(main PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/raylib/include/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/include/SDL3"
 )
 
 target_link_libraries(main PRIVATE stdc++exp)
 
-target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/raylib/lib/raylib.lib")
+target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/lib/x64/SDL3.lib")
 
 target_link_options(main PRIVATE "-static")
 
