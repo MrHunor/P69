@@ -15,3 +15,8 @@ testfiles/*
 
 #Cmake build foder
 build/*
+
+
+#Testfiles 
+*.mp4
+*.mp3
