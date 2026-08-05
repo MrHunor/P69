@@ -27,10 +27,10 @@ std::string DownloadVideo(const std::string& videoName)
         query.pop_back();
     }
 
-    std::string cmd =
-        "yt-dlp -S \"res:720\" "
-        "--print after_move:filepath "
-        "\"ytsearch:" + query + "\"";
+ std::string cmd =
+    "yt-dlp -S \"vcodec:h264,res:720\" "
+    "--print after_move:filepath "
+    "\"ytsearch:" + query + "\"";
 
     FILE* pipe = _popen(cmd.c_str(), "r");
     if (!pipe)

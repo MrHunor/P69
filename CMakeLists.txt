@@ -15,14 +15,44 @@ set(ALL_SOURCES ${SRC_FILES} ${VID_FILES} ${UTI_FILES} )
 add_executable(main ${ALL_SOURCES})
 
 target_include_directories(main PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/include/SDL3"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/include/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/vlc/include/"
 )
 
 target_link_libraries(main PRIVATE stdc++exp)
 
 target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/lib/x64/SDL3.lib")
-
+target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/vlc/lib/vlc.lib")
+ 
 target_link_options(main PRIVATE "-static")
+
+add_custom_command(TARGET main POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/plugins"
+        "$<TARGET_FILE_DIR:main>/plugins"
+    COMMENT "Copying plugins to build directory"
+)
+add_custom_command(TARGET main POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_CURRENT_SOURCE_DIR}/libvlc.dll"
+        "$<TARGET_FILE_DIR:main>/libvlc.dll"
+   
+    COMMENT "Copying libvlc.dll to build directory"
+)
+add_custom_command(TARGET main POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_CURRENT_SOURCE_DIR}/libvlccore.dll"
+        "$<TARGET_FILE_DIR:main>/libvlccore.dll"
+   
+    COMMENT "Copying libvlccore.dll to build directory"
+)
+add_custom_command(TARGET main POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/lib/x64/SDL3.dll"
+        "$<TARGET_FILE_DIR:main>/SDL3.dll"
+   
+    COMMENT "Copying libvlccore.dll to build directory"
+)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(main PRIVATE "-fdiagnostics-color=always")
