@@ -10,8 +10,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 file(GLOB SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 file(GLOB VID_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/vid/*.cpp")
 file(GLOB UTI_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/*.cpp")
+file(GLOB AUD_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/audio/*.cpp")
 
-set(ALL_SOURCES ${SRC_FILES} ${VID_FILES} ${UTI_FILES} )
+set(ALL_SOURCES ${SRC_FILES} ${VID_FILES} ${UTI_FILES} ${AUD_FILES} )
 add_executable(main ${ALL_SOURCES})
 
 target_include_directories(main PRIVATE
@@ -20,6 +21,10 @@ target_include_directories(main PRIVATE
 )
 
 target_link_libraries(main PRIVATE stdc++exp)
+target_link_libraries(main PRIVATE ole32)
+target_link_libraries(main PRIVATE mmdevapi)
+target_link_libraries(main PRIVATE uuid)
+target_link_libraries(main PRIVATE ksuser)
 
 target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/SDL3/lib/x64/SDL3.lib")
 target_link_libraries(main PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/vlc/lib/vlc.lib")

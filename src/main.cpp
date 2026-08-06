@@ -5,9 +5,11 @@
 #include "vid/vid.h"
 #include "SDL3/SDL.h"
 #include "vlc/vlc.h"
+#include "audio/audio.h"
 
 int main(int argc, char *argv[])
 {
+    CaptureAudio(5,"test.wav");
     bool running = true;
     SDL_Event event;
     std::cout << GetCurrentPlayingInfo() << std::endl;
